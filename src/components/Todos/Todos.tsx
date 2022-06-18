@@ -7,8 +7,8 @@ import Todo from "../../models/todo";
 
 function Todos({ todos }: { todos: Todo[] }) {
   return (
-    <Container sx={{ maxWidth: "45rem" }}>
-      <Stack sx={{ p: 3 }} spacing={3}>
+    <Container sx={{ width: "50rem", maxWidth: "90%" }}>
+      <Stack sx={{ m: 4 }} spacing={3}>
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}

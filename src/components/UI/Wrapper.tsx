@@ -1,9 +1,10 @@
 import React from "react";
 
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Container } from "@mui/material";
 
-const StyledBox = styled(Box)(({ theme }) => ({
+const StyledContainer = styled(Container)(({ theme }) => ({
+  width: "70%",
   minHeight: "100vh",
   padding: theme.spacing(3),
   backgroundColor: theme.palette.mode === "dark" ? "#36454f" : "#f7f7f7",
@@ -11,7 +12,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }));
 
 function Wrapper({ children }: { children: React.ReactNode }) {
-  return <StyledBox>{children}</StyledBox>;
+  return <StyledContainer>{children}</StyledContainer>;
 }
 
 export default Wrapper;

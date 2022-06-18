@@ -9,7 +9,7 @@ import Todo from "../../models/todo";
 function TodoAppBar({ onNewTodo }: { onNewTodo: (newTodo: Todo) => void }) {
   return (
     <AppBar
-      sx={{ maxWidth: "90%", mx: "auto" }}
+      sx={{ maxWidth: "45rem", mx: "auto" }}
       position="static"
       color="transparent"
     >
