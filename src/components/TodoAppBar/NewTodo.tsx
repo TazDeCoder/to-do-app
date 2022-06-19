@@ -34,16 +34,18 @@ function NewTodo({
   const saveTodoDataHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     // Check validation of inputs
-    const sanitisedInput = enteredText.trim();
-    if (sanitisedInput.length === 0) return;
-    if (!dateRef.current) return;
+    const sanitisedEnteredText = enteredText.trim();
+    const sanitisedEnteredDate = new Date(dateRef.current!.value);
+    if (sanitisedEnteredText.length === 0) return;
     // Handle sanitised inputs
-    const date = new Date(dateRef.current.value);
-    const todo = TodoFactoryFunction(sanitisedInput, date);
+    const todo = TodoFactoryFunction(
+      sanitisedEnteredText,
+      sanitisedEnteredDate
+    );
     onNewTodo(todo);
     // Clear input fields
     setEnteredText("");
-    dateRef.current.value = "";
+    dateRef.current!.value = "";
   };
 
   return (
@@ -82,7 +84,11 @@ function NewTodo({
           disabled={isArchives}
         />
         <Tooltip title="Add new todo">
-          <IconButton disabled={isArchives} onClick={saveTodoDataHandler}>
+          <IconButton
+            aria-label="new todo"
+            disabled={isArchives}
+            onClick={saveTodoDataHandler}
+          >
             <AddCircleOutlineIcon />
           </IconButton>
         </Tooltip>
