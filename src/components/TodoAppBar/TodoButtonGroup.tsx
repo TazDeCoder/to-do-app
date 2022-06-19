@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Tooltip, IconButton } from "@mui/material";
+import { Box, Tooltip, IconButton } from "@mui/material";
+
 import {
   Sort as SortIcon,
   Inventory as InventoryIcon,
@@ -18,7 +19,7 @@ function TodoButtonGroup({
   onToggleSort: () => void;
 }) {
   return (
-    <React.Fragment>
+    <Box sx={{ my: 1 }}>
       <Tooltip title={`Sort ${isAscending ? "descending" : "ascending"}`}>
         <IconButton onClick={onToggleSort}>
           <SortIcon />
@@ -29,7 +30,7 @@ function TodoButtonGroup({
           <InventoryIcon />
         </IconButton>
       </Tooltip>
-    </React.Fragment>
+    </Box>
   );
 }
 

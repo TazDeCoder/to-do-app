@@ -4,7 +4,6 @@ import { styled } from "@mui/material/styles";
 import { Container } from "@mui/material";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
-  width: "70%",
   minHeight: "100vh",
   padding: theme.spacing(3),
   backgroundColor: theme.palette.mode === "dark" ? "#36454f" : "#f7f7f7",
