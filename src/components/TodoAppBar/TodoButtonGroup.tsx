@@ -21,12 +21,12 @@ function TodoButtonGroup({
   return (
     <Box sx={{ my: 1 }}>
       <Tooltip title={`Sort ${isAscending ? "descending" : "ascending"}`}>
-        <IconButton onClick={onToggleSort}>
+        <IconButton aria-label="sort todos" onClick={onToggleSort}>
           <SortIcon />
         </IconButton>
       </Tooltip>
       <Tooltip title={`${isArchives ? "Hide" : "Show"} archives`}>
-        <IconButton onClick={onToggleArchives}>
+        <IconButton aria-label="todo archives" onClick={onToggleArchives}>
           <InventoryIcon />
         </IconButton>
       </Tooltip>

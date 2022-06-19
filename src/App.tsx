@@ -12,11 +12,11 @@ function sortTodos(todos: Todo[], ascending = true) {
 
   if (ascending) {
     sortedTodos = todos.sort(({ dueDate: d1 }, { dueDate: d2 }) => {
-      if (d1.getTime() > d2.getTime()) {
+      if (d1.getTime() < d2.getTime()) {
         return 1;
       }
 
-      if (d1.getTime() < d2.getTime()) {
+      if (d1.getTime() > d2.getTime()) {
         return -1;
       }
 
@@ -24,11 +24,11 @@ function sortTodos(todos: Todo[], ascending = true) {
     });
   } else {
     sortedTodos = todos.sort(({ dueDate: d1 }, { dueDate: d2 }) => {
-      if (d1.getTime() < d2.getTime()) {
+      if (d1.getTime() > d2.getTime()) {
         return 1;
       }
 
-      if (d1.getTime() > d2.getTime()) {
+      if (d1.getTime() < d2.getTime()) {
         return -1;
       }
 
@@ -71,17 +71,14 @@ function App() {
     });
   };
 
-  const toggleArchiveTodoHandler = (todo: Todo) => {
+  const updateTodoHandler = (todo: Todo) => {
     setTodos((prevTodos) => {
       const updatedTodos = [...prevTodos];
 
       const todoIdx = updatedTodos.findIndex((el) => el.id === todo.id);
 
       if (todoIdx !== -1) {
-        updatedTodos[todoIdx] = {
-          ...todo,
-          archived: !todo.archived,
-        };
+        updatedTodos[todoIdx] = todo;
       }
 
       return updatedTodos;
@@ -103,7 +100,7 @@ function App() {
           : sortTodos(filteredTodos, false)
       }
       onRemoveTodo={removeTodoHandler}
-      onToggleArchiveTodo={toggleArchiveTodoHandler}
+      onUpdateTodo={updateTodoHandler}
     />
   );
 
