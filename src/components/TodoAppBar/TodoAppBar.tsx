@@ -6,7 +6,19 @@ import NewTodo from "./NewTodo";
 import TodoButtonGroup from "./TodoButtonGroup";
 import Todo from "../../models/todo";
 
-function TodoAppBar({ onNewTodo }: { onNewTodo: (newTodo: Todo) => void }) {
+function TodoAppBar({
+  isArchives,
+  isAscending,
+  onNewTodo,
+  onToggleArchives,
+  onToggleSort,
+}: {
+  isArchives: boolean;
+  isAscending: boolean | null;
+  onNewTodo: (newTodo: Todo) => void;
+  onToggleArchives: () => void;
+  onToggleSort: () => void;
+}) {
   return (
     <AppBar
       sx={{ maxWidth: "45rem", mx: "auto" }}
@@ -14,8 +26,13 @@ function TodoAppBar({ onNewTodo }: { onNewTodo: (newTodo: Todo) => void }) {
       color="transparent"
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <NewTodo onNewTodo={onNewTodo} />
-        <TodoButtonGroup />
+        <NewTodo isArchives={isArchives} onNewTodo={onNewTodo} />
+        <TodoButtonGroup
+          isArchives={isArchives}
+          isAscending={isAscending}
+          onToggleArchives={onToggleArchives}
+          onToggleSort={onToggleSort}
+        />
       </Toolbar>
     </AppBar>
   );
