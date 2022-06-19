@@ -18,7 +18,7 @@ import {
 import Todo from "../../models/todo";
 
 interface StatusBadgeProps {
-  status?: "expired" | "active" | "null";
+  status: "expired" | "active";
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -49,16 +49,22 @@ const StatusBadge = styled(Badge)<StatusBadgeProps>(({ theme, status }) => ({
   }),
 }));
 
-function TodoItem({ todo }: { todo: Todo }) {
-  // TODO:
-  // - [] show status of todo in badge
-  // - [] add handler to remove todo
-  // - [] add handler to archive/unarchive todo
+function TodoItem({
+  todo,
+  onRemoveTodo,
+  onToggleArchiveTodo,
+}: {
+  todo: Todo;
+  onRemoveTodo: (todo: Todo) => void;
+  onToggleArchiveTodo: (todo: Todo) => void;
+}) {
+  const { text, archived, dueDate } = todo;
 
-  const { text, archived } = todo;
+  const status =
+    dueDate.getTime() > new Date().getTime() ? "active" : "expired";
 
   return (
-    <StatusBadge badgeContent="null">
+    <StatusBadge badgeContent={status} status={status}>
       <Item elevation={2}>
         <Checkbox aria-label="check todo" />
         <Typography
@@ -72,20 +78,26 @@ function TodoItem({ todo }: { todo: Todo }) {
           {text}
         </Typography>
         <Tooltip title="Delete todo">
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => onRemoveTodo(todo)}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
         {archived ? (
-          <Tooltip title="Archive todo">
-            <IconButton aria-label="archive">
-              <ArchiveIcon />
+          <Tooltip title="Unarchive todo">
+            <IconButton
+              aria-label="unarchive"
+              onClick={() => onToggleArchiveTodo(todo)}
+            >
+              <UnarchiveIcon />
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Unarchive todo">
-            <IconButton aria-label="unarchive">
-              <UnarchiveIcon />
+          <Tooltip title="Archive todo">
+            <IconButton
+              aria-label="archive"
+              onClick={() => onToggleArchiveTodo(todo)}
+            >
+              <ArchiveIcon />
             </IconButton>
           </Tooltip>
         )}
