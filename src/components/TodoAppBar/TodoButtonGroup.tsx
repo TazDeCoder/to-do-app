@@ -6,20 +6,26 @@ import {
   Inventory as InventoryIcon,
 } from "@mui/icons-material";
 
-function TodoButtonGroup() {
-  // TODO:
-  // - [] add state to manage sort method
-  // - [] add handler to show archived todos
-
+function TodoButtonGroup({
+  isArchives,
+  isAscending,
+  onToggleArchives,
+  onToggleSort,
+}: {
+  isArchives: boolean;
+  isAscending: boolean | null;
+  onToggleArchives: () => void;
+  onToggleSort: () => void;
+}) {
   return (
     <React.Fragment>
-      <Tooltip title="Sort ascending">
-        <IconButton>
+      <Tooltip title={`Sort ${isAscending ? "descending" : "ascending"}`}>
+        <IconButton onClick={onToggleSort}>
           <SortIcon />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Show archives">
-        <IconButton>
+      <Tooltip title={`${isArchives ? "Hide" : "Show"} archives`}>
+        <IconButton onClick={onToggleArchives}>
           <InventoryIcon />
         </IconButton>
       </Tooltip>
