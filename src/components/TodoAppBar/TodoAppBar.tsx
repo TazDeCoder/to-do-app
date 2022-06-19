@@ -4,6 +4,7 @@ import { AppBar, Toolbar } from "@mui/material";
 
 import NewTodo from "./NewTodo";
 import TodoButtonGroup from "./TodoButtonGroup";
+
 import Todo from "../../models/todo";
 
 function TodoAppBar({
@@ -25,7 +26,15 @@ function TodoAppBar({
       position="static"
       color="transparent"
     >
-      <Toolbar sx={{ justifyContent: "space-between" }}>
+      <Toolbar
+        sx={{
+          flexFlow: {
+            xs: "column wrap",
+            sm: "row wrap",
+          },
+          justifyContent: "center",
+        }}
+      >
         <NewTodo isArchives={isArchives} onNewTodo={onNewTodo} />
         <TodoButtonGroup
           isArchives={isArchives}

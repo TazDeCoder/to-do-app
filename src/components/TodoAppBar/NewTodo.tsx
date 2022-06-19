@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import { Box, TextField, Tooltip, IconButton } from "@mui/material";
 
@@ -7,11 +7,12 @@ import { AddCircleOutline as AddCircleOutlineIcon } from "@mui/icons-material";
 
 import Todo from "../../models/todo";
 
-function TodoFactoryFunction(text: string): Todo {
+function TodoFactoryFunction(text: string, date: Date): Todo {
   return {
     id: Math.random().toString(),
     text,
-    dueDate: new Date(),
+    dueDate: date,
+    checked: false,
     archived: false,
   };
 }
@@ -24,6 +25,7 @@ function NewTodo({
   onNewTodo: (newTodo: Todo) => void;
 }) {
   const [enteredText, setEnteredText] = useState("");
+  const dateRef = useRef<HTMLInputElement>(null);
 
   const handleChangedText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEnteredText(e.target.value);
@@ -31,14 +33,17 @@ function NewTodo({
 
   const saveTodoDataHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // Check validation of input
+    // Check validation of inputs
     const sanitisedInput = enteredText.trim();
     if (sanitisedInput.length === 0) return;
-    // Handle sanitised input
-    const todo = TodoFactoryFunction(sanitisedInput);
+    if (!dateRef.current) return;
+    // Handle sanitised inputs
+    const date = new Date(dateRef.current.value);
+    const todo = TodoFactoryFunction(sanitisedInput, date);
     onNewTodo(todo);
-    // Clear input field
+    // Clear input fields
     setEnteredText("");
+    dateRef.current.value = "";
   };
 
   return (
@@ -46,26 +51,38 @@ function NewTodo({
       <Box
         sx={{
           display: "flex",
+          flexWrap: "wrap",
           alignItems: "center",
         }}
       >
         <TextField
-          sx={{ maxWidth: "64ch" }}
+          sx={{
+            flexGrow: 1,
+            width: { xs: "100%", sm: "initial" },
+            maxWidth: "48ch",
+            mx: 1,
+          }}
           label="Enter a task..."
           variant="outlined"
           margin="normal"
-          fullWidth
           inputProps={{ maxLength: 64 }}
-          value={enteredText}
           disabled={isArchives}
+          value={enteredText}
           onChange={handleChangedText}
         />
+        <TextField
+          sx={{ maxWidth: "48ch", mx: 1 }}
+          label="Completion date"
+          type="date"
+          margin="normal"
+          inputRef={dateRef}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          disabled={isArchives}
+        />
         <Tooltip title="Add new todo">
-          <IconButton
-            sx={{ mx: 1 }}
-            disabled={isArchives}
-            onClick={saveTodoDataHandler}
-          >
+          <IconButton disabled={isArchives} onClick={saveTodoDataHandler}>
             <AddCircleOutlineIcon />
           </IconButton>
         </Tooltip>
