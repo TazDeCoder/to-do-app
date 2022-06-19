@@ -1,7 +1,8 @@
 interface Todo {
-  id: string | number;
+  id: string;
   text: string;
   dueDate: Date;
+  checked: boolean;
   archived: boolean;
 }
 
