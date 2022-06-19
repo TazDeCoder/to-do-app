@@ -9,11 +9,11 @@ import Todo from "../../models/todo";
 function Todos({
   todos,
   onRemoveTodo,
-  onToggleArchiveTodo,
+  onUpdateTodo,
 }: {
   todos: Todo[];
   onRemoveTodo: (todo: Todo) => void;
-  onToggleArchiveTodo: (todo: Todo) => void;
+  onUpdateTodo: (todo: Todo) => void;
 }) {
   return (
     <Box sx={{ width: "90%", maxWidth: "40rem", my: 3, mx: "auto" }}>
@@ -23,7 +23,7 @@ function Todos({
             key={todo.id}
             todo={todo}
             onRemoveTodo={onRemoveTodo}
-            onToggleArchiveTodo={onToggleArchiveTodo}
+            onUpdateTodo={onUpdateTodo}
           />
         ))}
       </Stack>

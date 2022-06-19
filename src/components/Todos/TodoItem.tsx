@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 import { Typography, Checkbox, IconButton } from "@mui/material";
 
@@ -16,21 +17,32 @@ import Todo from "../../models/todo";
 function TodoItem({
   todo,
   onRemoveTodo,
-  onToggleArchiveTodo,
+  onUpdateTodo,
 }: {
   todo: Todo;
   onRemoveTodo: (todo: Todo) => void;
-  onToggleArchiveTodo: (todo: Todo) => void;
+  onUpdateTodo: (todo: Todo) => void;
 }) {
   const { text, archived, dueDate, checked } = todo;
+
+  const [isChecked, setIsChecked] = useState<boolean>(checked);
 
   const status =
     dueDate.getTime() > new Date().getTime() ? "active" : "expired";
 
+  const handleChangedChecked = () => {
+    setIsChecked((prevState) => !prevState);
+    onUpdateTodo({ ...todo, checked: !todo.checked });
+  };
+
   return (
     <StatusBadge badgeContent={status} status={status}>
       <Item elevation={2}>
-        <Checkbox aria-label="check todo" checked={checked} />
+        <Checkbox
+          aria-label="check todo"
+          checked={isChecked}
+          onChange={handleChangedChecked}
+        />
         <Typography
           sx={{
             flexGrow: 1,
@@ -47,14 +59,14 @@ function TodoItem({
         {archived ? (
           <IconButton
             aria-label="unarchive"
-            onClick={() => onToggleArchiveTodo(todo)}
+            onClick={() => onUpdateTodo({ ...todo, archived: false })}
           >
             <UnarchiveIcon />
           </IconButton>
         ) : (
           <IconButton
             aria-label="archive"
-            onClick={() => onToggleArchiveTodo(todo)}
+            onClick={() => onUpdateTodo({ ...todo, archived: true })}
           >
             <ArchiveIcon />
           </IconButton>
