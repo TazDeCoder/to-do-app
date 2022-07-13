@@ -1,8 +1,5 @@
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import { Typography, Checkbox, IconButton } from "@mui/material";
-
 import {
   Delete as DeleteIcon,
   Archive as ArchiveIcon,
@@ -24,16 +21,15 @@ function TodoItem({
   onUpdateTodo: (todo: Todo) => void;
 }) {
   const { text, archived, dueDate, checked } = todo;
-
   const [isChecked, setIsChecked] = useState<boolean>(checked);
-
-  const status =
-    dueDate.getTime() > new Date().getTime() ? "active" : "expired";
 
   const handleChangedChecked = () => {
     setIsChecked((prevState) => !prevState);
     onUpdateTodo({ ...todo, checked: !todo.checked });
   };
+
+  const status =
+    dueDate.getTime() > new Date().getTime() ? "active" : "expired";
 
   return (
     <StatusBadge badgeContent={status} status={status}>

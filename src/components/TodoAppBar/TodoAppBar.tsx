@@ -1,5 +1,4 @@
 import React from "react";
-
 import { AppBar, Toolbar } from "@mui/material";
 
 import NewTodo from "./NewTodo";

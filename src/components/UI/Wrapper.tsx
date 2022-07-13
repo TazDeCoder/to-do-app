@@ -1,7 +1,6 @@
 import React from "react";
-
-import { styled } from "@mui/material/styles";
-import { Container } from "@mui/material";
+import styled from "@mui/material/styles/styled";
+import Container from "@mui/material/Container";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   minHeight: "100vh",

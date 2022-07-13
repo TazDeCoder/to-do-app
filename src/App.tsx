@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Wrapper from "./components/UI/Wrapper";
 import TodoAppBar from "./components/TodoAppBar/TodoAppBar";
@@ -12,20 +11,16 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [showArchives, setShowArchives] = useState(false);
   const [isAscending, setIsAscending] = useState<boolean | null>(null);
-
   // Handler functions
   const toggleArchivesHandler = () => {
     setShowArchives((prevState) => !prevState);
   };
-
   const toggleSortHandler = () => {
     setIsAscending((prevState) => (prevState ? false : true));
   };
-
   const newTodoHandler = (newTodo: Todo) => {
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
-
   const removeTodoHandler = (todo: Todo) => {
     setTodos((prevTodos) => {
       const updatedTodos = [...prevTodos];
@@ -39,7 +34,6 @@ function App() {
       return updatedTodos;
     });
   };
-
   const updateTodoHandler = (todo: Todo) => {
     setTodos((prevTodos) => {
       const updatedTodos = [...prevTodos];
@@ -53,7 +47,6 @@ function App() {
       return updatedTodos;
     });
   };
-
   // Conditional JSX elements
   const filteredTodos = showArchives
     ? todos.filter((todo) => todo.archived === true)
@@ -62,7 +55,7 @@ function App() {
   const todosContent = (
     <Todos
       todos={
-        typeof isAscending === null
+        !isAscending
           ? filteredTodos
           : isAscending
           ? sortTodos(filteredTodos, true)

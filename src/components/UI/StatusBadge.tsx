@@ -1,7 +1,5 @@
-import React from "react";
-
-import { styled } from "@mui/material/styles";
-import { Badge } from "@mui/material";
+import styled from "@mui/material/styles/styled";
+import Badge from "@mui/material/Badge";
 
 interface StatusBadgeProps {
   status: "expired" | "active";
