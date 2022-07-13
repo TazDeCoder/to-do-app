@@ -9,7 +9,7 @@ import {
 import StatusBadge from "../UI/StatusBadge";
 import Item from "../UI/Item";
 
-import Todo from "../../models/todo";
+import { Todo } from "../../models/index";
 
 function TodoItem({
   todo,

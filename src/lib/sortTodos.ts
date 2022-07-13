@@ -1,4 +1,4 @@
-import Todo from "../models/todo";
+import { Todo } from "../models/index";
 
 export default function sortTodos(array: Todo[], isAscending = true) {
   if (isAscending) {

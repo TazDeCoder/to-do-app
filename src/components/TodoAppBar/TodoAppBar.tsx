@@ -4,7 +4,7 @@ import { AppBar, Toolbar } from "@mui/material";
 import NewTodo from "./NewTodo";
 import TodoButtonGroup from "./TodoButtonGroup";
 
-import Todo from "../../models/todo";
+import { Todo } from "../../models/index";
 
 function TodoAppBar({
   isArchives,

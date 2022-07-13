@@ -3,7 +3,7 @@ import { Box, Stack } from "@mui/material";
 
 import TodoItem from "./TodoItem";
 
-import Todo from "../../models/todo";
+import { Todo } from "../../models/index";
 
 function Todos({
   todos,

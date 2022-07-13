@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Box, TextField, Tooltip, IconButton } from "@mui/material";
 import { AddCircleOutline as AddCircleOutlineIcon } from "@mui/icons-material";
 
-import Todo from "../../models/todo";
+import { Todo } from "../../models/index";
 
 function TodoFactoryFunction(text: string, date: Date): Todo {
   return {

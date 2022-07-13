@@ -4,7 +4,7 @@ import Wrapper from "./components/UI/Wrapper";
 import TodoAppBar from "./components/TodoAppBar/TodoAppBar";
 import Todos from "./components/Todos/Todos";
 
-import Todo from "./models/todo";
+import { Todo } from "./models/index";
 import { sortTodos } from "./lib";
 
 function App() {
