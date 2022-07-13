@@ -4,40 +4,9 @@ import { useState } from "react";
 import Wrapper from "./components/UI/Wrapper";
 import TodoAppBar from "./components/TodoAppBar/TodoAppBar";
 import Todos from "./components/Todos/Todos";
+
 import Todo from "./models/todo";
-
-// Helper functions
-function sortTodos(todos: Todo[], ascending = true) {
-  let sortedTodos: Todo[];
-
-  if (ascending) {
-    sortedTodos = todos.sort(({ dueDate: d1 }, { dueDate: d2 }) => {
-      if (d1.getTime() < d2.getTime()) {
-        return 1;
-      }
-
-      if (d1.getTime() > d2.getTime()) {
-        return -1;
-      }
-
-      return 0;
-    });
-  } else {
-    sortedTodos = todos.sort(({ dueDate: d1 }, { dueDate: d2 }) => {
-      if (d1.getTime() > d2.getTime()) {
-        return 1;
-      }
-
-      if (d1.getTime() < d2.getTime()) {
-        return -1;
-      }
-
-      return 0;
-    });
-  }
-
-  return sortedTodos;
-}
+import { sortTodos } from "./lib";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
